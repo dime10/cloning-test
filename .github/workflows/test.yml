@@ -3,8 +3,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  recursive:
-    name: Clone recursively
+  checkout:
+    name: Checkout recursively
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repo
@@ -35,6 +35,13 @@ jobs:
 
     - name: Clone repo
       run: git clone https://github.com/llvm/llvm-project.git llvm-project-2
+
+  recursive:
+    name: Recursive clone
+    runs-on: ubuntu-latest
+    steps:
+    - name: Clone repo
+      run: git clone --recursive https://github.com/dime10/cloning-test.git
 
   actions:
     name: Actions clone
