@@ -1,0 +1,38 @@
+name: Test Submodule Cloning
+on:
+  workflow_dispatch:
+
+jobs:
+  recursive:
+    name: Clone recursively
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+      with:
+        submodules: true
+
+  submodule:
+    name: Submodule update
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+      with:
+        submodules: false
+
+    - name: Clone submodule
+      run: git submodule update --init llvm-project
+
+  clone:
+    name: Independent clone
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+      with:
+        submodules: false
+
+    - name: Clone repo
+      run: git clone https://github.com/llvm/llvm-project.git llvm-project-2
+
