@@ -35,7 +35,7 @@ jobs:
 
     - name: Clone repo
       run: git clone https://github.com/llvm/llvm-project.git llvm-project-2
-  
+
   actions:
     name: Actions clone
     runs-on: ubuntu-latest
@@ -44,9 +44,27 @@ jobs:
       uses: actions/checkout@v3
       with:
         submodules: false
-    
+
     - name: Clone repo
       uses: actions/checkout@v3
       with:
         repository: llvm/llvm-project
+        ref: 4821508d4db75a535d02b8938f81fac6de66cc26
         path: llvm-project-2
+
+  shallow:
+    name: Shallow clone
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+      with:
+        submodules: false
+
+    - name: Clone repo
+      run: |
+        mkdir llvm-project-2 && cd llvm-project-2
+        git init
+        git remote add origin https://github.com/llvm/llvm-project.git
+        git fetch --depth 1 origin 4821508d4db75a535d02b8938f81fac6de66cc26
+        git checkout FETCH_HEAD
