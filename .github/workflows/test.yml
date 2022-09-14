@@ -35,4 +35,18 @@ jobs:
 
     - name: Clone repo
       run: git clone https://github.com/llvm/llvm-project.git llvm-project-2
-
+  
+  actions:
+    name: Actions clone
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+      with:
+        submodules: false
+    
+    - name: Clone repo
+      uses: actions/checkout@v3
+      with:
+        repository: llvm/llvm-project
+        path: llvm-project-2
