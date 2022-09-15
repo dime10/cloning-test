@@ -22,7 +22,7 @@ jobs:
         submodules: false
 
     - name: Clone submodule
-      run: git submodule update --init llvm-project
+      run: git submodule update --init --depth=1 llvm-project
 
   clone:
     name: Independent clone
