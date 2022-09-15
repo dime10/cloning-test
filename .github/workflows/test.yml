@@ -34,7 +34,9 @@ jobs:
         submodules: false
 
     - name: Clone repo
-      run: git clone https://github.com/llvm/llvm-project.git llvm-project-2
+      run: |
+        git clone https://github.com/llvm/llvm-project.git llvm-project
+        git status
 
   recursive:
     name: Recursive clone
@@ -57,7 +59,10 @@ jobs:
       with:
         repository: llvm/llvm-project
         ref: 4821508d4db75a535d02b8938f81fac6de66cc26
-        path: llvm-project-2
+        path: llvm-project
+    
+    - name: Status
+      run: git status
 
   shallow:
     name: Shallow clone
@@ -70,8 +75,10 @@ jobs:
 
     - name: Clone repo
       run: |
-        mkdir llvm-project-2 && cd llvm-project-2
+        cd llvm-project
         git init
         git remote add origin https://github.com/llvm/llvm-project.git
         git fetch --depth 1 origin 4821508d4db75a535d02b8938f81fac6de66cc26
         git checkout FETCH_HEAD
+        cd ..
+        git status
